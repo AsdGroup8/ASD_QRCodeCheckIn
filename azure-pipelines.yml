@@ -17,6 +17,7 @@ jobs:
       targetType: inline 
       script: >-
         go version &&
+        echo $GOPATH &&
         go get -u golang.org/x/lint/golint &&
         go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.41.1
   - task: Bash@3
@@ -24,14 +25,14 @@ jobs:
     inputs:
       targetType: inline
       script: >-
-        golint -set_exit_status ./...
+        ~/go/bin/golint -set_exit_status ./...
 
   - task: Bash@3
     displayName: golangci-lint
     inputs:
       targetType: inline
       script: >-
-        golangci-lint run -v ./...
+        ~/go/bin/golangci-lint run -v ./...
   - task: Bash@3
     displayName: build docker image
     inputs:
