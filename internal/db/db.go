@@ -2,15 +2,12 @@ package db
 
 import (
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/log"
-
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
 
-var (
-	db *gorm.DB
-)
+var db *gorm.DB
 
 // Init initialize database
 func Init(connStr string) error {

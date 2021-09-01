@@ -93,7 +93,7 @@ func Warn(msg string, fields ...zap.Field) {
 
 // Warnf ...
 func Warnf(format string, args ...interface{}) {
-	s.Warnf(format, args)
+	s.Warnf(format, args...)
 }
 
 // Warnw ...
@@ -123,7 +123,7 @@ func Fatal(msg string, fields ...zap.Field) {
 
 // Fatalf ...
 func Fatalf(format string, args ...interface{}) {
-	s.Fatalf(format, args)
+	s.Fatalf(format, args...)
 }
 
 // Fatalw ...
