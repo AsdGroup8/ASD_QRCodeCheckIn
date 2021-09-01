@@ -17,9 +17,11 @@ jobs:
       targetType: inline 
       script: >-
         go version &&
-        echo $GOPATH &&
+        go env -w GOPROXY=https://goproxy.cn,direct &&
+        go env -w GOPATH=~/go &&
         go get -u golang.org/x/lint/golint &&
-        go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.41.1
+        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.42.0
+
   - task: Bash@3
     displayName: golint
     inputs:
@@ -33,11 +35,14 @@ jobs:
       targetType: inline
       script: >-
         ~/go/bin/golangci-lint run -v ./...
+
   - task: Bash@3
-    displayName: build docker image
+    displayName: build
     inputs:
       targetType: 'inline'
       script: |
-        docker build -t asdgroup8/server:latest .
+        go mod tidy &&
+        mkdir -p ~/build &&
+        CGO_ENABLED=0 GOOS=linux go build -tags netgo -o ~/build/server .
 ...
 
