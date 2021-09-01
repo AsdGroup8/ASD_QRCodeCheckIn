@@ -36,6 +36,6 @@ jobs:
       repository: 'golang:1.16-alpine3.14'
       command: 'build'
       Dockerfile: '**/Dockerfile'
-      tags: 'asdgroup8/server:$(BuildId)'
+      tags: 'asdgroup8/server:latest'
 ...
 
