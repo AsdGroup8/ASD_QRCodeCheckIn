@@ -9,6 +9,8 @@ import (
 
 var db *gorm.DB
 
+type M = map[string]interface{}
+
 // Init initialize database
 func Init(connStr string) error {
 	dbConn, err := gorm.Open(mysql.Open(connStr), &gorm.Config{
