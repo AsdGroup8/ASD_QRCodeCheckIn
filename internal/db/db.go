@@ -9,6 +9,7 @@ import (
 
 var db *gorm.DB
 
+// M ...
 type M = map[string]interface{}
 
 // Init initialize database
