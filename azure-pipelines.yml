@@ -12,12 +12,12 @@ jobs:
   - checkout: self
     clean: true
   - task: Bash@3
-    displayName: display env
+    displayName: setup env
     inputs:
       targetType: inline 
       script: >-
-        go version
-        go get -u golang.org/x/lint/golint
+        go version &&
+        go get -u golang.org/x/lint/golint &&
         go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.41.1
   - task: Bash@3
     displayName: golint
