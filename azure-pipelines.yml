@@ -16,26 +16,20 @@ jobs:
     inputs:
       targetType: inline
       script: >-
-        # Write your commands here
-
-
-
         docker run --rm -v $(pwd):/data cytopia/golint -set_exit_status ./...
+
   - task: Bash@3
     displayName: golangci-lint
     inputs:
       targetType: inline
       script: >-
-        # Write your commands here
-
-
         docker run --rm -v $(pwd):/app -w /app golangci/golangci-lint:v1.42-alpine golangci-lint run -v ./...
-  - task: Docker@2
+
+  - task: Bash@3
     displayName: build
     inputs:
-      repository: 'golang:1.16-alpine3.14'
-      command: 'build'
-      Dockerfile: '**/Dockerfile'
-      tags: 'asdgroup8/server:latest'
+      targetType: inline
+      script: >-
+        docker build -t asdgroup8/server:latest .
 ...
 
