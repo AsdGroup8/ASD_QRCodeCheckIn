@@ -12,31 +12,31 @@ jobs:
   - checkout: self
     clean: true
   - task: Bash@3
+    displayName: display env
+    inputs:
+      targetType: inline 
+      script: >-
+        go version
+        go get -u golang.org/x/lint/golint
+        go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.41.1
+  - task: Bash@3
     displayName: golint
     inputs:
       targetType: inline
       script: >-
-        # Write your commands here
+        golint -set_exit_status ./...
 
-
-
-        docker run --rm -v $(pwd):/data cytopia/golint -set_exit_status ./...
   - task: Bash@3
     displayName: golangci-lint
     inputs:
       targetType: inline
       script: >-
-        # Write your commands here
-
-
-        docker run --rm -v $(pwd):/app -w /app golangci/golangci-lint:v1.42-alpine golangci-lint run -v ./...
+        golangci-lint run -v ./...
   - task: Bash@3
     displayName: build docker image
     inputs:
       targetType: 'inline'
       script: |
-        # Write your commands here
-        
         docker build -t asdgroup8/server:latest .
 ...
 
