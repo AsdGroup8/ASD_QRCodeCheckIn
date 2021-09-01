@@ -12,15 +12,12 @@ import (
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/db"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/log"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/service"
-
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 )
 
-var (
-	engine *gin.Engine
-)
+var engine *gin.Engine
 
 func main() {
 	rootCmd := &cobra.Command{
@@ -50,6 +47,7 @@ func Initialize(cmd *cobra.Command, _ []string) error {
 	return nil
 }
 
+// Run ...
 func Run(_ *cobra.Command, _ []string) {
 	server := http.Server{
 		Addr:    conf.Addr,
@@ -70,9 +68,9 @@ func Run(_ *cobra.Command, _ []string) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 	if err := server.Shutdown(ctx); err != nil {
-		log.Fatalf("server shutdown error. %v", err)
+		log.Errorf("server shutdown error. %v", err)
+		return
 	}
-
 	<-ctx.Done()
 	log.Info("server shutdown")
 }

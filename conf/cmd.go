@@ -2,6 +2,7 @@ package conf
 
 import "github.com/spf13/cobra"
 
+// Config
 var (
 	Addr      string
 	LogFile   string
@@ -10,6 +11,7 @@ var (
 	IsDebug   bool
 )
 
+// Init initialize config
 func Init(cmd *cobra.Command) {
 	flags := cmd.PersistentFlags()
 	flags.StringVar(&Addr, "addr", "127.0.0.1:8080", "http server listen address")
