@@ -2,7 +2,8 @@ package service
 
 import (
 	"errors"
-	"qr_checkin/internal/db"
+
+	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/db"
 
 	"gorm.io/gorm"
 )
