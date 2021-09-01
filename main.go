@@ -5,12 +5,13 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"qr_checkin/conf"
-	"qr_checkin/internal/db"
-	"qr_checkin/internal/log"
-	"qr_checkin/internal/service"
 	"syscall"
 	"time"
+
+	"github.com/AsdGroup8/ASD_QRCodeCheckIn/conf"
+	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/db"
+	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/log"
+	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/service"
 
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
@@ -32,6 +33,7 @@ func main() {
 	}
 }
 
+// Initialize ...
 func Initialize(cmd *cobra.Command, _ []string) error {
 	conf.Init(cmd)
 	if err := log.Init(conf.LogFile, conf.LogLevel); err != nil {

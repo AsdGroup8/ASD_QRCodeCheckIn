@@ -1,7 +1,7 @@
 package db
 
 import (
-	"qr_checkin/internal/log"
+	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/log"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

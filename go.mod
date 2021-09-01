@@ -1,4 +1,4 @@
-module qr_checkin
+module github.com/AsdGroup8/ASD_QRCodeCheckIn
 
 go 1.15
 
