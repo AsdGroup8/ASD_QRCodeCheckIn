@@ -8,7 +8,7 @@ type Person struct {
 	Name    string
 	Gender  EGender
 	Age     int16
-	Email   string
-	Phone   string
+	Email   string `gorm:"UNIQUE"`
+	Phone   string `gorm:"UNIQUE"`
 	Address string
 }
