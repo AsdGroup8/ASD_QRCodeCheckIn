@@ -19,6 +19,7 @@ jobs:
         go version
         go get -u golang.org/x/lint/golint
         go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.41.1
+        
   - task: Bash@3
     displayName: golint
     inputs:
@@ -32,6 +33,7 @@ jobs:
       targetType: inline
       script: >-
         golangci-lint run -v ./...
+        
   - task: Bash@3
     displayName: build docker image
     inputs:
