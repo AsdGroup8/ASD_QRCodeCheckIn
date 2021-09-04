@@ -12,33 +12,37 @@ jobs:
   - checkout: self
     clean: true
   - task: Bash@3
-    displayName: display env
+    displayName: setup env
     inputs:
       targetType: inline 
       script: >-
-        go version
-        go get -u golang.org/x/lint/golint
-        go get github.com/golangci/golangci-lint/cmd/golangci-lint@v1.41.1
-        
+        go version &&
+        go env -w GOPROXY=https://goproxy.cn,direct &&
+        go env -w GOPATH=~/go &&
+        go get -u golang.org/x/lint/golint &&
+        curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.42.0
+
   - task: Bash@3
     displayName: golint
     inputs:
       targetType: inline
       script: >-
-        golint -set_exit_status ./...
+        ~/go/bin/golint -set_exit_status ./...
 
   - task: Bash@3
     displayName: golangci-lint
     inputs:
       targetType: inline
       script: >-
-        golangci-lint run -v ./...
-        
+        ~/go/bin/golangci-lint run -v ./...
+
   - task: Bash@3
-    displayName: build docker image
+    displayName: build
     inputs:
       targetType: 'inline'
       script: |
-        docker build -t asdgroup8/server:latest .
+        go mod tidy &&
+        mkdir -p ~/build &&
+        CGO_ENABLED=0 GOOS=linux go build -tags netgo -o ~/build/server .
 ...
 
