@@ -36,13 +36,5 @@ jobs:
       script: >-
         ~/go/bin/golangci-lint run -v ./...
 
-  - task: Bash@3
-    displayName: build
-    inputs:
-      targetType: 'inline'
-      script: |
-        go mod tidy &&
-        mkdir -p ~/build &&
-        CGO_ENABLED=0 GOOS=linux go build -tags netgo -o ~/build/server .
 ...
 
