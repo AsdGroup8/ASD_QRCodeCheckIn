@@ -2,7 +2,7 @@
 ### Group8
 > @ Xiao ZHONG xiao.zhong-2@student.uts.edu.au  
 @ Dongrun Li  
-@ Hao Feng  
+@ Hao Feng     hao.feng-3@student.uts.edu.au
 @ Jinhao Huang  
 @ Zizheng Xu  
 
