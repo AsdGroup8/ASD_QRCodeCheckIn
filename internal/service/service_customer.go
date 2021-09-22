@@ -29,10 +29,24 @@ func FindCustomerByID(customerID uint) (*model.Customer, error) {
 	return customer, nil
 }
 
+// CustomerAuth check customer login info
+func CustomerAuth(email, password string) (*model.Customer, error) {
+	// condition
+	cond := db.M{
+		"email":    email,
+		"password": password,
+	}
+	customer := new(model.Customer)
+	if err := dbmgr.Where(cond).First(customer).Error; err != nil {
+		return nil, err
+	}
+	return customer, nil
+}
+
 // SelectCustomerS find all customers with model.Customer{} conditions
 func SelectCustomerS(customer model.Customer) ([]*model.Customer, error) {
 	customers := make([]*model.Customer, 0, 4)
-	if err := dbmgr.Where(&customer).Find(customers).Error; err != nil {
+	if err := dbmgr.Where(&customer).Find(&customers).Error; err != nil {
 		return nil, err
 	}
 	return customers, nil
@@ -41,7 +55,7 @@ func SelectCustomerS(customer model.Customer) ([]*model.Customer, error) {
 // SelectCustomerM find all customers with map conditions
 func SelectCustomerM(condition db.M) ([]*model.Customer, error) {
 	customers := make([]*model.Customer, 0, 4)
-	if err := dbmgr.Where(condition).Find(customers).Error; err != nil {
+	if err := dbmgr.Where(condition).Find(&customers).Error; err != nil {
 		return nil, err
 	}
 	return customers, nil

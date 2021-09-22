@@ -1,6 +1,8 @@
 package db
 
 import (
+	"database/sql"
+
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/log"
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"
@@ -14,9 +16,28 @@ var db *gorm.DB
 type M = map[string]interface{}
 
 // Init initialize database
-func Init(connStr string) error {
+func Init(connStr string, dbname string) error {
 	log.Debug("connecting to database", zap.String("connstr", connStr))
-	dbConn, err := gorm.Open(mysql.Open(connStr), &gorm.Config{
+	rawdb, err := sql.Open("mysql", connStr)
+	if err != nil {
+		return err
+	}
+
+	// Ensure database exists
+	tx, err := rawdb.Begin()
+	if err != nil {
+		return err
+	}
+	_, _ = tx.Exec("CREATE DATABASE IF NOT EXISTS " + dbname)
+	_, _ = tx.Exec("USE " + dbname)
+	if err := tx.Commit(); err != nil {
+		return err
+	}
+
+	// Dial with gorm
+	dbConn, err := gorm.Open(mysql.New(mysql.Config{
+		Conn: rawdb,
+	}), &gorm.Config{
 		Logger: logger.New(log.GetDBLogger(), logger.Config{
 			Colorful: true,
 		}),

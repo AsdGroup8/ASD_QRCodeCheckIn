@@ -3,3 +3,7 @@
 .idea
 .tmp
 **/*.exe
+**/.vscode
+**/server
+**/build
+**/ASD_QRCodeCheckIn
