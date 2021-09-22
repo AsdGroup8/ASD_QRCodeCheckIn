@@ -15,3 +15,5 @@ db_user: root
 db_password: somepassword
 # database name
 db_name: mydb
+# jwt sign secret
+secret: zhongxiaoyyds
