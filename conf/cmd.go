@@ -2,7 +2,6 @@ package conf
 
 import (
 	"fmt"
-	"log"
 
 	"github.com/spf13/cobra"
 )
@@ -16,29 +15,32 @@ var (
 	LogFile   string
 	LogLevel  string
 	DBConnStr string
+	DBName    string
 	IsDebug   bool
+	Secret    []byte
 )
 
-// Init initialize config
-func Init(cmd *cobra.Command) {
-
+// InitFlags initialize command line args
+func InitFlags(cmd *cobra.Command) {
 	flags := cmd.PersistentFlags()
-	flags.StringVar(&Env, "env", "", "environment")
-	if Env == "" {
-		log.Fatal("--env must be specified. dev|local|qas|prd")
-	}
+	flags.StringVar(&Env, "env", "", "server environment. e.g. dev|local|qas|prd")
 	flags.Int32Var(&ServerID, "serverid", 0, "server id")
-	if ServerID == 0 {
-		log.Fatal("--serverid must be > 0")
+}
+
+// Init initialize config
+func Init(cmd *cobra.Command) error {
+	if err := initConfigFile(); err != nil {
+		return err
 	}
-	if err := InitConfigFile(); err != nil {
-		log.Panic(err)
-	}
+	Secret = []byte(envConf.Secret)
+	flags := cmd.PersistentFlags()
 	flags.StringVar(&Addr, "addr", envConf.Addr, "http server listen address")
 	flags.StringVar(&LogFile, "logfile", envConf.LogFile, "log output file. stdout|stderr|file")
 	flags.StringVar(&LogLevel, "loglevel", envConf.LogLevel, "log output level")
-	dbConnStr := fmt.Sprintf("%s:%s@%s/%s_%d?parseTime=true&loc=Local", envConf.DBUser,
-		envConf.DBPasswd, envConf.DBUrl, envConf.DBName, ServerID)
+	dbConnStr := fmt.Sprintf("%s:%s@tcp(%s)/?parseTime=true&loc=Local", envConf.DBUser,
+		envConf.DBPasswd, envConf.DBUrl)
+	DBName = fmt.Sprintf("%s_%s_%d", envConf.DBName, Env, ServerID)
 	flags.StringVar(&DBConnStr, "db", dbConnStr, "database connection string")
 	flags.BoolVar(&IsDebug, "debug", true, "if debug")
+	return nil
 }
