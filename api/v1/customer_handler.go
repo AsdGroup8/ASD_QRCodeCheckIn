@@ -83,7 +83,7 @@ func OnCustomerGetProfile(ctx *gin.Context) {
 		id  uint
 		err error
 	)
-	id = ctx.GetUint(conf.StrUserID)
+	id = ctx.GetUint(conf.StrCustomerID)
 	if id == 0 {
 		log.Errorf("fail to get customer profile. %v", err)
 		reply.Error(ctx, ec.ErrUnauthorized)
