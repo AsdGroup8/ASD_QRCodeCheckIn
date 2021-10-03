@@ -1,6 +1,7 @@
 package service
 
 import (
+	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/log"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/model"
 )
 
@@ -17,4 +18,13 @@ func GetAllReservation(cusID uint) ([]model.Reservation, error) {
 func CreateReservation(r *model.Reservation) error {
 	// TODO: Check movie id valid
 	return dbmgr.Create(r).Error
+}
+
+// DeleteReservation ...
+func DeleteReservation(reservID uint) error {
+	if err := dbmgr.Delete(&model.Reservation{}, reservID).Error; err != nil {
+		log.Errorf("fail to delete reservation %d. %v", reservID, err)
+		return err
+	}
+	return nil
 }

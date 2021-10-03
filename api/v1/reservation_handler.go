@@ -1,6 +1,8 @@
 package v1
 
 import (
+	"strconv"
+
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/conf"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/ec"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/log"
@@ -50,4 +52,20 @@ func OnCustomerGetReservHis(ctx *gin.Context) {
 
 // OnCustomerDelReservHis ...
 func OnCustomerDelReservHis(ctx *gin.Context) {
+	strID := ctx.Query("id")
+	if strID == "" {
+		reply.Error(ctx, ec.ErrInvalidParam)
+		return
+	}
+	reservID, err := strconv.Atoi(strID)
+	if err != nil {
+		reply.Error(ctx, ec.ErrInvalidParam)
+		log.Errorf("fail to parse customer id. %v", err)
+		return
+	}
+	if err := service.DeleteReservation(uint(reservID)); err != nil {
+		reply.Error(ctx, ec.ErrInternal)
+		return
+	}
+	reply.OK(ctx, nil)
 }
