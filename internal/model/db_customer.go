@@ -10,13 +10,13 @@ import (
 // Customer ...
 type Customer struct {
 	*gorm.Model
-	Name     string
-	Gender   EGender
-	DOB      int64
-	Email    string `gorm:"UNIQUE"` // login
-	Phone    string `gorm:"UNIQUE"`
-	Password string
-	Address  string
+	Name     string  `json:"name"`
+	Gender   EGender `json:"gender"`
+	DOB      int64   `json:"dob"`
+	Email    string  `gorm:"UNIQUE" json:"email"` // login
+	Phone    string  `gorm:"UNIQUE" json:"phone"`
+	Password string  `json:"password"`
+	Address  string  `json:"address"`
 }
 
 // BeforeCreate create hook
