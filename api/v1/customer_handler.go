@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"strconv"
 	"strings"
 
+	"github.com/AsdGroup8/ASD_QRCodeCheckIn/conf"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/ec"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/log"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/model"
@@ -80,23 +80,16 @@ func OnCustomerAuth(ctx *gin.Context) {
 // OnCustomerGetProfile handle customer get profile
 func OnCustomerGetProfile(ctx *gin.Context) {
 	var (
-		id  int
+		id  uint
 		err error
 	)
-	if idstr := ctx.Query("id"); idstr != "" {
-		id, err = strconv.Atoi(idstr)
-		if err != nil {
-			log.Errorf("fail to get customer profile. %v", err)
-			reply.Error(ctx, err)
-			return
-		}
-	} else {
-		log.Errorf("fail to get customer profile. %v", ec.InvalidFormat)
-		reply.Error(ctx, ec.ErrInvalidFormat)
-		return
+	id = ctx.GetUint(conf.StrUserID)
+	if id == 0 {
+		log.Errorf("fail to get customer profile. %v", err)
+		reply.Error(ctx, ec.ErrUnauthorized)
 	}
 
-	cus, err := service.FindCustomerByID(uint(id))
+	cus, err := service.FindCustomerByID(id)
 	if err != nil {
 		log.Errorf("fail to get customer profile. %v", err)
 		reply.Error(ctx, err)

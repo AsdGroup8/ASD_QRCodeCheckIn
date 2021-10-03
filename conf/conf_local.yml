@@ -1,12 +1,9 @@
 # http server listen address
-addr: localhost:8080
-
+addr: :8000
 # log file path, also stdout stderr is acceptable
 logfile: stdout
-
 # log level: info warn debug error fatal panic
 loglevel: debug
-
 # database url
 db_url: localhost:3306
 # database user
@@ -14,6 +11,8 @@ db_user: root
 # database password
 db_password: somepassword
 # database name
-db_name: mydb
+db_name: movie_checkin
 # jwt sign secret
 secret: zhongxiaoyyds
+# imdb api
+imdb_key: k_1ijdku7c

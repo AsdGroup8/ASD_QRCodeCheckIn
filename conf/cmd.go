@@ -18,6 +18,7 @@ var (
 	DBName    string
 	IsDebug   bool
 	Secret    []byte
+	ImdbAPI   string
 )
 
 // InitFlags initialize command line args
@@ -40,6 +41,7 @@ func Init(cmd *cobra.Command) error {
 	dbConnStr := fmt.Sprintf("%s:%s@tcp(%s)/?parseTime=true&loc=Local", envConf.DBUser,
 		envConf.DBPasswd, envConf.DBUrl)
 	DBName = fmt.Sprintf("%s_%s_%d", envConf.DBName, Env, ServerID)
+	ImdbAPI = "https://imdb-api.com/en/API/InTheaters/" + envConf.ImdbAPIKey
 	flags.StringVar(&DBConnStr, "db", dbConnStr, "database connection string")
 	flags.BoolVar(&IsDebug, "debug", true, "if debug")
 	return nil

@@ -10,6 +10,7 @@ const (
 	Unauthorized  ErrCode = 2
 	InvalidToken  ErrCode = 3
 	InvalidFormat ErrCode = 4
+	InvalidParam  ErrCode = 5
 
 	CustomerNameEmpty    ErrCode = 11
 	CustomerEmailEmpty   ErrCode = 12
