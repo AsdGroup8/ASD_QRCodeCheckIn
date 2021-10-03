@@ -33,7 +33,7 @@ func UserAuthMiddleware() gin.HandlerFunc {
 			return
 		}
 		// set user id
-		c.Set(conf.StrUserID, claim.UserID)
+		c.Set(conf.StrCustomerID, claim.UserID)
 		claim.Free()
 		c.Next()
 	}

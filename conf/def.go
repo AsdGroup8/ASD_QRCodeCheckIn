@@ -4,7 +4,7 @@ import "time"
 
 // Defines
 const (
-	StrUserID = "user_id"
+	StrCustomerID = "user_id"
 
 	MovieUpdateGap = time.Hour * 12
 )
