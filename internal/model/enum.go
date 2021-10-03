@@ -5,6 +5,7 @@ type EGender int8
 
 // enums
 const (
-	GenderFemale EGender = iota // Female
-	GenderMale   EGender = iota // Male
+	GenderUnknown EGender = iota // Unknown
+	GenderFemale  EGender = iota // Female
+	GenderMale    EGender = iota // Male
 )

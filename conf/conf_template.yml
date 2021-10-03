@@ -17,3 +17,5 @@ db_password: somepassword
 db_name: mydb
 # jwt sign secret
 secret: zhongxiaoyyds
+# imdb api
+imdb_key: someapikey

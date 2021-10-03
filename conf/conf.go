@@ -10,14 +10,15 @@ var envConf EnvConfig
 
 // EnvConfig ...
 type EnvConfig struct {
-	Addr     string `mapstructure:"addr"`
-	LogFile  string `mapstructure:"logfile"`
-	LogLevel string `mapstructure:"loglevel"`
-	DBUrl    string `mapstructure:"db_url"`
-	DBUser   string `mapstructure:"db_user"`
-	DBPasswd string `mapstructure:"db_password"`
-	DBName   string `mapstructure:"db_name"`
-	Secret   string `mapstructure:"secret"`
+	Addr       string `mapstructure:"addr"`
+	LogFile    string `mapstructure:"logfile"`
+	LogLevel   string `mapstructure:"loglevel"`
+	DBUrl      string `mapstructure:"db_url"`
+	DBUser     string `mapstructure:"db_user"`
+	DBPasswd   string `mapstructure:"db_password"`
+	DBName     string `mapstructure:"db_name"`
+	Secret     string `mapstructure:"secret"`
+	ImdbAPIKey string `mapstructure:"imdb_key"`
 }
 
 // initConfigFile ...

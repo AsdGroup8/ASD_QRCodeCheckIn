@@ -11,6 +11,7 @@ import (
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/conf"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/db"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/log"
+	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/middleware"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/internal/service"
 	"github.com/AsdGroup8/ASD_QRCodeCheckIn/router"
 	ginzap "github.com/gin-contrib/zap"
@@ -87,6 +88,7 @@ func initEngine() {
 	engine = gin.New()
 	engine.Use(ginzap.Ginzap(log.L(), time.RFC3339, false))
 	engine.Use(ginzap.RecoveryWithZap(log.L(), true))
+	engine.Use(middleware.Cors())
 	// init routers
 	r := engine.Group("/api/v1")
 	router.InitAppRouter(r)

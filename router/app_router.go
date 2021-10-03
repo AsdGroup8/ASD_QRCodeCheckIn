@@ -1,18 +1,14 @@
 package router
 
 import (
-	"net/http"
-
+	apiv1 "github.com/AsdGroup8/ASD_QRCodeCheckIn/api/v1"
 	"github.com/gin-gonic/gin"
 )
 
 // InitAppRouter ...
 func InitAppRouter(r gin.IRouter) {
-	apiApp := r.Group("/app")
-	// TODO: JWT
+	app := r.Group("/app")
 	{
-		apiApp.GET("/test", func(c *gin.Context) {
-			c.String(http.StatusOK, "test")
-		})
+		app.GET("/movie", apiv1.OnGetAllMovie)
 	}
 }

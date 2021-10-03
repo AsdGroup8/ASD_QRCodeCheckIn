@@ -38,6 +38,7 @@ var (
 	ErrSuccess              = NewError(Success, "Success")
 	ErrInternal             = NewError(Internal, "internal server error")
 	ErrInvalidFormat        = NewError(InvalidFormat, "data format invalid")
+	ErrInvalidParam         = NewError(InvalidParam, "parameter is invalid")
 	ErrCustomerNameEmpty    = NewError(CustomerNameEmpty, "customer's name is empty")
 	ErrCustomerEmailEmpty   = NewError(CustomerEmailEmpty, "customer's email is empty")
 	ErrCustomerPhoneEmpty   = NewError(CustomerPhoneEmpty, "customer's phone is empty")
