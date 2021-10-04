@@ -1,5 +1,5 @@
 # http server listen address
-addr: :8000
+addr: localhost:8000
 # log file path, also stdout stderr is acceptable
 logfile: stdout
 # log level: info warn debug error fatal panic
