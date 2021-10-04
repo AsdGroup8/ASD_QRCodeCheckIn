@@ -12,9 +12,9 @@ const (
 	InvalidFormat ErrCode = 4
 	InvalidParam  ErrCode = 5
 
-	CustomerNameEmpty    ErrCode = 11
-	CustomerEmailEmpty   ErrCode = 12
-	CustomerPhoneEmpty   ErrCode = 13
-	CustomerAddressEmpty ErrCode = 14
-	CustomerDOBInvalid   ErrCode = 15
+	// CustomerNameEmpty    ErrCode = 11
+	// CustomerEmailEmpty   ErrCode = 12
+	// CustomerPhoneEmpty   ErrCode = 13
+	// CustomerAddressEmpty ErrCode = 14
+	// CustomerDOBInvalid   ErrCode = 15
 )

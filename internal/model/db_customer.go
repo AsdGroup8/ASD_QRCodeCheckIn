@@ -24,15 +24,15 @@ func (c *Customer) BeforeCreate(tx *gorm.DB) error {
 	// check not null fields
 	switch "" {
 	case c.Name:
-		return ec.ErrCustomerNameEmpty
+		return ec.ErrInvalidFormat
 	case c.Email:
-		return ec.ErrCustomerEmailEmpty
+		return ec.ErrInvalidFormat
 	case c.Phone:
-		return ec.ErrCustomerPhoneEmpty
+		return ec.ErrInvalidFormat
 	}
 	// check dob is valid
 	if c.DOB >= time.Now().Unix() {
-		return ec.ErrCustomerDOBInvalid
+		return ec.ErrInvalidFormat
 	}
 	return nil
 }
