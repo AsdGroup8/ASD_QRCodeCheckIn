@@ -1,0 +1,18 @@
+# http server listen address
+addr: localhost:8000
+# log file path, also stdout stderr is acceptable
+logfile: stdout
+# log level: info warn debug error fatal panic
+loglevel: debug
+# database url
+db_url: 13.76.96.157:3306
+# database user
+db_user: root
+# database password
+db_password: eequalsmc2
+# database name
+db_name: pipeline_movie_checkin
+# jwt sign secret
+secret: zhongxiaoyyds
+# imdb api
+imdb_key: k_1ijdku7c
