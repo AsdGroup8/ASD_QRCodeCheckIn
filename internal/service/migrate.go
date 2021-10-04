@@ -10,5 +10,5 @@ func MigrateModel() error {
 	if err := dbmgr.AutoMigrate(&model.Staff{}); err != nil {
 		return err
 	}
-	return dbmgr.AutoMigrate(&model.Reservation{})
+	return dbmgr.AutoMigrate(&model.DBReservation{})
 }

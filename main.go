@@ -48,6 +48,7 @@ func Initialize(cmd *cobra.Command, _ []string) error {
 	if err := service.Init(); err != nil {
 		return err
 	}
+	service.InitMovies()
 	if err := service.MigrateModel(); err != nil {
 		return err
 	}

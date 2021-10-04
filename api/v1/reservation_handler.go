@@ -19,7 +19,7 @@ func OnCustomerCreateReserv(ctx *gin.Context) {
 		reply.Error(ctx, ec.ErrUnauthorized)
 		return
 	}
-	r := &model.Reservation{}
+	r := &model.DBReservation{}
 	if err := ctx.ShouldBind(r); err != nil {
 		log.Errorf("fail to bind. %v", err)
 		reply.Error(ctx, ec.ErrInvalidParam)
@@ -47,7 +47,18 @@ func OnCustomerGetReservHis(ctx *gin.Context) {
 		log.Errorf("fail to get customer %d's reservation.", cusID)
 		return
 	}
-	reply.OK(ctx, reservList)
+	packed := make([]*model.Reservation, 0, len(reservList))
+	for i := range reservList {
+		p := reservList[i].Packed()
+		movie := service.GetMovieByID(reservList[i].MovieID)
+		if movie != nil {
+			p.MovieName = movie.Title
+		} else {
+			p.MovieName = "Unknown Movie"
+		}
+		packed = append(packed, p)
+	}
+	reply.OK(ctx, packed)
 }
 
 // OnCustomerDelReservHis ...
