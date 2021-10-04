@@ -30,7 +30,7 @@ func Test_CreateReservation(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	resp, err := http.Post(_baseApi+"/customer/reserv", "json", bytes.NewReader(data))
+	resp, err := http.Post(_baseAPI+"/customer/reserv", "json", bytes.NewReader(data))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -38,7 +38,7 @@ func Test_CreateReservation(t *testing.T) {
 }
 
 func Test_GetReservation(t *testing.T) {
-	resp, err := http.Get(_baseApi + "/customer/reserv/history")
+	resp, err := http.Get(_baseAPI + "/customer/reserv/history")
 	if err != nil {
 		t.Fatal(err)
 	}
