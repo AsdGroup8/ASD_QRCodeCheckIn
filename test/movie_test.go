@@ -6,7 +6,7 @@ import (
 )
 
 func Test_GetInTheaterMovie(t *testing.T) {
-	resp, err := http.Get(_baseApi + "/app/v1")
+	resp, err := http.Get(_baseAPI + "/app/v1")
 	if err != nil {
 		t.Error(err)
 		t.Fail()

@@ -1,5 +1,6 @@
 package test
 
+// define
 const (
-	_baseApi = "http://localhost:8000/api/v1"
+	_baseAPI = "http://localhost:8000/api/v1"
 )

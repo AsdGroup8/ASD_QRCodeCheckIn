@@ -24,7 +24,7 @@ func Test_RegisterCustomer(t *testing.T) {
 		t.Error(err)
 		t.Fail()
 	}
-	resp, err := http.Post(_baseApi+"/customer/reg", "json", bytes.NewReader(data))
+	resp, err := http.Post(_baseAPI+"/customer/reg", "json", bytes.NewReader(data))
 	if err != nil {
 		t.Error(err)
 		t.Fail()
@@ -46,7 +46,7 @@ func Test_ModifyCustomer(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	req, err := http.NewRequest(http.MethodPut, _baseApi+"/customer/profile", bytes.NewReader(data))
+	req, err := http.NewRequest(http.MethodPut, _baseAPI+"/customer/profile", bytes.NewReader(data))
 	if err != nil {
 		t.Fatal(err)
 	}
