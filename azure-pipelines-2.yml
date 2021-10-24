@@ -25,5 +25,7 @@ steps:
       git clone https://github.com/AsdGroup8/ASD_QRCodeCheckIn -b dev source
       cd source
       docker build -t asdgroup8/server:latest .
+      cd ~
+      rm -rf ~/source
       docker run --rm --name server --env dev --serverid 20
     readyTimeout: '20000'
