@@ -13,4 +13,5 @@ RUN go build -o build/server github.com/AsdGroup8/ASD_QRCodeCheckIn
 # RUNNING
 FROM alpine:3.14
 COPY --from=compiler /go/src/server/build/server .
-ENTRYPOINT "./server"
+COPY --from=compiler /go/src/server/conf/*.yml ./conf/
+ENTRYPOINT ["./server"]
