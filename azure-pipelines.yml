@@ -2,7 +2,7 @@ resources:
   repositories:
   - repository: self
     type: git
-    ref: master
+    ref: dev
 jobs:
 - job: Job_1
   displayName: Agent job 1
