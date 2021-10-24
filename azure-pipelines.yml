@@ -36,5 +36,26 @@ jobs:
       script: >-
         ~/go/bin/golangci-lint run -v ./...
 
+  - task: Bash@3
+    displayName: create archive folder
+    inputs:
+      targetType: inline
+      script: >-
+        mkdir -p build/conf
+
+  - task: Bash@3
+    displayName: build binary
+    inputs:
+      targetType: inline
+      script: >-
+        go build -o ./build/server .
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: './build'
+      includeRootFolder: true
+      archiveType: 'tar'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).tar.gz'
+      replaceExistingArchive: true
+      verbose: true
 ...
 
