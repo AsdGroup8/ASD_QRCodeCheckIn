@@ -26,6 +26,9 @@ func InitFlags(cmd *cobra.Command) {
 	flags := cmd.PersistentFlags()
 	flags.StringVar(&Env, "env", "", "server environment. e.g. dev|local|qas|prd")
 	flags.Int32Var(&ServerID, "serverid", 0, "server id")
+	flags.StringVar(&Addr, "addr", "", "http server listen address")
+	flags.StringVar(&LogFile, "logfile", "", "log output file. stdout|stderr|file")
+	flags.StringVar(&LogLevel, "loglevel", "", "log output level")
 }
 
 // Init initialize config
@@ -35,9 +38,15 @@ func Init(cmd *cobra.Command) error {
 	}
 	Secret = []byte(envConf.Secret)
 	flags := cmd.PersistentFlags()
-	flags.StringVar(&Addr, "addr", envConf.Addr, "http server listen address")
-	flags.StringVar(&LogFile, "logfile", envConf.LogFile, "log output file. stdout|stderr|file")
-	flags.StringVar(&LogLevel, "loglevel", envConf.LogLevel, "log output level")
+	if Addr == "" {
+		Addr = envConf.Addr
+	}
+	if LogFile == "" {
+		LogFile = envConf.LogFile
+	}
+	if LogLevel == "" {
+		LogLevel = envConf.LogLevel
+	}
 	dbConnStr := fmt.Sprintf("%s:%s@tcp(%s)/?parseTime=true&loc=Local", envConf.DBUser,
 		envConf.DBPasswd, envConf.DBUrl)
 	DBName = fmt.Sprintf("%s_%s_%d", envConf.DBName, Env, ServerID)
