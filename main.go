@@ -77,11 +77,8 @@ func Run(_ *cobra.Command, _ []string) {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
-	if err := server.Shutdown(ctx); err != nil {
-		log.Errorf("server shutdown error. %v", err)
-		return
-	}
 	<-ctx.Done()
+	server.Close()
 	log.Info("server shutdown")
 }
 
